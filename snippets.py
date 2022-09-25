@@ -55,7 +55,7 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 
 def QuickScatter(x, y, c, 
-        cmap='jet', 
+        cm='jet', 
         vmin=0, 
         vmax=1, 
         ticks=None,
@@ -65,9 +65,9 @@ def QuickScatter(x, y, c,
         pad=0.05,
         ):
 
+        cmap = mpl.cm.get_cmap(cm)
 
         fig, ax = plt.subplots()
-        cmap = mpl.cm[cmap]
         norm = mpl.colors.Normalize(vmin=vmin, vmax=vmax)
         sm = mpl.cm.ScalarMappable(norm=norm, cmap=cmap)
 
@@ -96,3 +96,4 @@ def QuickScatter(x, y, c,
 
 # %%
 ### END
+# %%
