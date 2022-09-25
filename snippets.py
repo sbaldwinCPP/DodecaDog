@@ -1,13 +1,10 @@
-# %% imports
+# %% 
+# file dialogs
 
-# file stuff
 import os
 import tkinter as tk
 from tkinter import filedialog as fd
 
-
-
-# %% file dialogs
 def FileFolderDialog(method='single', 
         ftypes=[], 
         IncludeAllFiles=True,
@@ -49,8 +46,9 @@ def FileFolderDialog(method='single',
         root.destroy()
 
 
-# %% scatter plots
-# plotting stuff
+# %% 
+# scatter plots
+
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 
@@ -93,7 +91,5 @@ def QuickScatter(x, y, c,
 
         return fig, ax
 
-
 # %%
 ### END
-# %%
