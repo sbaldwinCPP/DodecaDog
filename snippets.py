@@ -1,11 +1,13 @@
-# %% 
-# imports
+# %% imports
+
+# file stuff
 import os
 import tkinter as tk
 from tkinter import filedialog as fd
 
-# %% 
-# file dialogs
+
+
+# %% file dialogs
 def FileFolderDialog(method='single', 
         ftypes=[], 
         IncludeAllFiles=True,
@@ -45,5 +47,35 @@ def FileFolderDialog(method='single',
 
     finally:
         root.destroy()
+
+
+# %% scatter plots
+# plotting stuff
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+
+def QuickScatter(x, y, c, cmap=mpl.cm.cool, cmin=0, cmax=1):
+        fig, ax = plt.subplots()
+
+        norm = mpl.colors.Normalize(vmin=cmin, vmax=cmax)
+        sm = mpl.cm.ScalarMappable(norm=norm, cmap=cmap)
+
+        ax.scatter(x, y, color=sm.cmap(sm.norm(c)))
+
+        txt = [str(round(i,2)) for i in c]
+        for i,j,k in zip(x,y,txt):
+                ax.annotate(k, xy=(i, j))
+
+        cb = plt.colorbar(sm,
+                orientation='vertical',
+                #label='Some Units',
+                #labelpad=-40,
+                )
+
+        cb.set_label('Some Units', labelpad=-100)
+
+        return fig, ax
+
+
 # %%
 ### END
