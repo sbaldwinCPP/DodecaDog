@@ -5,43 +5,41 @@ import os
 import tkinter as tk
 from tkinter import filedialog as fd
 
-def FileFolderDialog(method='single', 
+def QuickFile(
+        folder=False,
+        multi=False,
         ftypes=[], 
-        IncludeAllFiles=True,
+        AllFileTypes=True,
         initdir=os.getcwd(),
         ):
 
     # add option for all files
-    if IncludeAllFiles: ftypes.append(('All files', '*'))
-
+    if AllFileTypes: ftypes.append(('All files', '*'))
     # create the root window
     root = tk.Tk()
     root.withdraw() # hides root window
-    
     try:
-        if method.lower() == 'single': 
-                filename = fd.askopenfilename(
+        if folder: 
+                filename = fd.askdirectory(
                         parent=root,
-                        title='Select a file',
+                        title='Select a folder',
                         initialdir=initdir,
-                        filetypes=ftypes,
                         )
-        elif method.lower() == 'multi': 
+        elif multi: 
                 filename = fd.askopenfilenames(
                         parent=root,
                         title='Select file(s)',
                         initialdir=initdir,
                         filetypes=ftypes,
                         )
-        elif method.lower() == 'folder': 
-                filename = fd.askdirectory(
+        else:
+                filename = fd.askopenfilename(
                         parent=root,
-                        title='Select a folder',
+                        title='Select a file',
                         initialdir=initdir,
+                        filetypes=ftypes,
                         )
-        else: raise TypeError('method not recognized')
         return filename
-
     finally:
         root.destroy()
 
@@ -52,7 +50,8 @@ def FileFolderDialog(method='single',
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 
-def QuickScatter(x, y, c, 
+def QuickScatter(
+        x, y, c, 
         cm='jet', 
         vmin=0, 
         vmax=1, 
@@ -62,33 +61,37 @@ def QuickScatter(x, y, c,
         units='',
         pad=0.05,
         ):
-
+        
+        # convert colormap name to cmap object
         cmap = mpl.cm.get_cmap(cm)
-
-        fig, ax = plt.subplots()
+        # setup colorbar
         norm = mpl.colors.Normalize(vmin=vmin, vmax=vmax)
         sm = mpl.cm.ScalarMappable(norm=norm, cmap=cmap)
-
+        # initaialize fig
+        fig, ax = plt.subplots()
+        # plot data
         ax.scatter(x, y, color=sm.cmap(sm.norm(c)))
+        # define axis labels
         ax.set_xlabel(xlabel)
         ax.set_ylabel(ylabel)
-
+        # define annotations
         txt = [str(round(i,1)) for i in c]
-        for i,j,k in zip(x,y,txt):
-                ax.annotate(k, xy=(i, j))
-
-        cb = plt.colorbar(sm,
+        # plot annotations
+        for x,y,t in zip(x,y,txt): ax.annotate(t, xy=(x, y))
+        # add colorbar
+        cb = plt.colorbar(
+                sm,
                 ax=ax,
                 orientation='vertical',
                 ticks=ticks,
                 pad=pad,
                 )
-
-        cb.set_label(units, 
+        # add colorbar label
+        cb.set_label(
+                units, 
                 labelpad=-45,
                 fontsize=10,
                 )
-
         return fig, ax
 
 # %%
