@@ -21,19 +21,19 @@ def QuickFile(
         root.withdraw() # hides root window
         try:
                 if folder: filename = fd.askdirectory(
-                                        parent = root,
-                                        title = 'Select a folder',
-                                        initialdir = initdir)
+                        parent = root,
+                        title = 'Select a folder',
+                        initialdir = initdir)
                 elif multi: filename = fd.askopenfilenames(
-                                        parent = root,
-                                        title = 'Select file(s)',
-                                        initialdir = initdir,
-                                        filetypes = ftypes)
+                        parent = root,
+                        title = 'Select file(s)',
+                        initialdir = initdir,
+                        filetypes = ftypes)
                 else: filename = fd.askopenfilename(
-                                        parent = root,
-                                        title = 'Select a file',
-                                        initialdir = initdir,
-                                        filetypes = ftypes)
+                        parent = root,
+                        title = 'Select a file',
+                        initialdir = initdir,
+                        filetypes = ftypes)
                 return filename
         finally: root.destroy()
 
