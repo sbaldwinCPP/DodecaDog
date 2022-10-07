@@ -6,42 +6,36 @@ import tkinter as tk
 from tkinter import filedialog as fd
 
 def QuickFile(
-        folder=False,
-        multi=False,
-        ftypes=[], 
-        AllFileTypes=True,
-        initdir=os.getcwd(),
-        ):
-
-    # add option for all files
-    if AllFileTypes: ftypes.append(('All files', '*'))
-    # create the root window
-    root = tk.Tk()
-    root.withdraw() # hides root window
-    try:
-        if folder: 
-                filename = fd.askdirectory(
-                        parent=root,
-                        title='Select a folder',
-                        initialdir=initdir,
-                        )
-        elif multi: 
-                filename = fd.askopenfilenames(
-                        parent=root,
-                        title='Select file(s)',
-                        initialdir=initdir,
-                        filetypes=ftypes,
-                        )
-        else:
-                filename = fd.askopenfilename(
-                        parent=root,
-                        title='Select a file',
-                        initialdir=initdir,
-                        filetypes=ftypes,
-                        )
-        return filename
-    finally:
-        root.destroy()
+        folder = False,
+        multi = False,
+        ftypes = [], 
+        AllFileTypes = True,
+        initdir = os.getcwd()):
+        """
+        docstring
+        """
+        # add option for all files
+        if AllFileTypes: ftypes.append(('All files', '*'))
+        # create the root window
+        root = tk.Tk()
+        root.withdraw() # hides root window
+        try:
+                if folder: filename = fd.askdirectory(
+                                        parent = root,
+                                        title = 'Select a folder',
+                                        initialdir = initdir)
+                elif multi: filename = fd.askopenfilenames(
+                                        parent = root,
+                                        title = 'Select file(s)',
+                                        initialdir = initdir,
+                                        filetypes = ftypes)
+                else: filename = fd.askopenfilename(
+                                        parent = root,
+                                        title = 'Select a file',
+                                        initialdir = initdir,
+                                        filetypes = ftypes)
+                return filename
+        finally: root.destroy()
 
 
 # %% 
@@ -49,19 +43,23 @@ def QuickFile(
 
 import matplotlib.pyplot as plt
 import matplotlib as mpl
+import numpy as np
 
 def QuickScatter(
-        x, y, c, 
-        cm='jet', 
-        vmin=0, 
-        vmax=1, 
-        ticks=None,
-        xlabel=None,
-        ylabel=None,
-        units='',
-        pad=0.05,
-        ):
-        
+        x = np.random.rand(10),
+        y = np.random.rand(10),
+        c = np.random.rand(10), 
+        cm = 'jet', 
+        vmin = 0, 
+        vmax = 1, 
+        ticks = None,
+        xlabel = None,
+        ylabel = None,
+        units = '',
+        pad = 0.05 ):
+        """
+        docstring
+        """
         # convert colormap name to cmap object
         cmap = mpl.cm.get_cmap(cm)
         # setup colorbar
@@ -81,17 +79,15 @@ def QuickScatter(
         # add colorbar
         cb = plt.colorbar(
                 sm,
-                ax=ax,
-                orientation='vertical',
-                ticks=ticks,
-                pad=pad,
-                )
+                ax = ax,
+                orientation = 'vertical',
+                ticks = ticks,
+                pad = pad)
         # add colorbar label
         cb.set_label(
                 units, 
-                labelpad=-45,
-                fontsize=10,
-                )
+                labelpad = -45,
+                fontsize = 10)
         return fig, ax
 
 # %%
