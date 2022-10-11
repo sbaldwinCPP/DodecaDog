@@ -5,88 +5,89 @@ import os
 import tkinter as tk
 from tkinter import filedialog as fd
 
-def FileFolderDialog(
-        dir = os.getcwd(),
-        method = 'single', 
+def QuickFile(
+        folder = False,
+        multi = False,
         ftypes = [], 
-        IncludeAllFiles = True,
-        ):
-    # add option for all files
-    if IncludeAllFiles: ftypes.append(('All files', '*'))
-    # create the root window
-    root = tk.Tk()
-    root.attributes("-topmost", True) # bring to front
-    root.withdraw() # hides root window
-    try:
-        if method.lower() == 'single': 
-                filename = fd.askopenfilename(
-                        parent=root,
-                        title='Select a file',
-                        initialdir=dir,
-                        filetypes=ftypes,
-                        )
-        elif method.lower() == 'multi': 
-                filename = fd.askopenfilenames(
-                        parent=root,
-                        title='Select file(s)',
-                        initialdir=dir,
-                        filetypes=ftypes,
-                        )
-        elif method.lower() == 'folder': 
-                filename = fd.askdirectory(
-                        parent=root,
-                        title='Select a folder',
-                        initialdir=dir,
-                        )
-        else: raise TypeError('method not recognized')
-        return filename
-    finally:
-        root.destroy()
-
+        AllFileTypes = True,
+        dir = os.getcwd()):
+        """
+        docstring
+        """
+        # add option for all files
+        if AllFileTypes: ftypes.append(('All files', '*'))
+        # create the root window
+        root = tk.Tk()
+        root.attributes("-topmost", True) # bring to front
+        root.withdraw() # hides root window
+        try:
+                if folder: filename = fd.askdirectory(
+                        parent = root,
+                        title = 'Select a folder',
+                        initialdir = dir)
+                elif multi: filename = fd.askopenfilenames(
+                        parent = root,
+                        title = 'Select file(s)',
+                        initialdir = dir,
+                        filetypes = ftypes)
+                else: filename = fd.askopenfilename(
+                        parent = root,
+                        title = 'Select a file',
+                        initialdir = dir,
+                        filetypes = ftypes)
+                return filename
+        finally: root.destroy()
 
 # %% 
 # scatter plots
 
 import matplotlib.pyplot as plt
 import matplotlib as mpl
+import numpy as np
 
-def QuickScatter(x, y, c, 
-        cm='jet', 
-        vmin=0, 
-        vmax=1, 
-        ticks=None,
-        xlabel=None,
-        ylabel=None,
-        units='',
-        pad=0.05,
-        ):
-
+def QuickScatter(
+        x = np.random.rand(10),
+        y = np.random.rand(10),
+        c = np.random.rand(10), 
+        cm = 'jet', 
+        vmin = 0, 
+        vmax = 1, 
+        ticks = None,
+        xlabel = None,
+        ylabel = None,
+        units = '',
+        pad = 0.05 ):
+        """
+        docstring
+        """
+        # convert colormap name to cmap object
         cmap = mpl.cm.get_cmap(cm)
-
-        fig, ax = plt.subplots()
+        # setup colorbar
         norm = mpl.colors.Normalize(vmin=vmin, vmax=vmax)
         sm = mpl.cm.ScalarMappable(norm=norm, cmap=cmap)
-
+        # initaialize fig
+        fig, ax = plt.subplots()
+        # plot data
         ax.scatter(x, y, color=sm.cmap(sm.norm(c)))
+        # define axis labels
         ax.set_xlabel(xlabel)
         ax.set_ylabel(ylabel)
-
+        # define annotations
         txt = [str(round(i,1)) for i in c]
-        for i,j,k in zip(x,y,txt):
-                ax.annotate(k, xy=(i, j))
-
-        cb = plt.colorbar(sm,
-                ax=ax,
-                orientation='vertical',
-                ticks=ticks,
-                pad=pad,
-                )
-
-        cb.set_label(units, 
-                labelpad=-45,
-                fontsize=10,
-                )
-
+        # plot annotations
+        for x,y,t in zip(x,y,txt): ax.annotate(t, xy=(x, y))
+        # add colorbar
+        cb = plt.colorbar(
+                sm,
+                ax = ax,
+                orientation = 'vertical',
+                ticks = ticks,
+                pad = pad)
+        # add colorbar label
+        cb.set_label(
+                units, 
+                labelpad = -45,
+                fontsize = 10)
         return fig, ax
 
 # %%
