@@ -10,7 +10,7 @@ def QuickFile(
         multi = False,
         ftypes = [], 
         AllFileTypes = True,
-        initdir = os.getcwd()):
+        dir = os.getcwd()):
         """
         docstring
         """
@@ -18,25 +18,25 @@ def QuickFile(
         if AllFileTypes: ftypes.append(('All files', '*'))
         # create the root window
         root = tk.Tk()
+        root.attributes("-topmost", True) # bring to front
         root.withdraw() # hides root window
         try:
                 if folder: filename = fd.askdirectory(
                         parent = root,
                         title = 'Select a folder',
-                        initialdir = initdir)
+                        initialdir = dir)
                 elif multi: filename = fd.askopenfilenames(
                         parent = root,
                         title = 'Select file(s)',
-                        initialdir = initdir,
+                        initialdir = dir,
                         filetypes = ftypes)
                 else: filename = fd.askopenfilename(
                         parent = root,
                         title = 'Select a file',
-                        initialdir = initdir,
+                        initialdir = dir,
                         filetypes = ftypes)
                 return filename
         finally: root.destroy()
-
 
 # %% 
 # scatter plots
