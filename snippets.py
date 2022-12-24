@@ -90,5 +90,6 @@ def QuickScatter(
                 fontsize = 10)
         return fig, ax
 
+
 # %%
 ### END
