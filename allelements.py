@@ -80,7 +80,7 @@ def make_window(theme):
     layout = [ [sg.MenubarCustom(menu_def, key='-MENU-', font='Courier 15', tearoff=True)],
                 [sg.Text('Demo Of (Almost) All Elements', size=(38, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE, k='-TEXT HEADING-', enable_events=True)]]
     layout +=[[sg.TabGroup([[  sg.Tab('Input Elements', input_layout),
-                               sg.Tab('Asthetic Elements', asthetic_layout),
+                               sg.Tab('Aesthetic Elements', asthetic_layout),
                                sg.Tab('Graphing', graphing_layout),
                                sg.Tab('Popups', popup_layout),
                                sg.Tab('Theming', theme_layout),
@@ -90,6 +90,7 @@ def make_window(theme):
     #layout[-1].append(sg.Sizegrip())
     window = sg.Window('All Elements Demo', layout, right_click_menu=right_click_menu_def, right_click_menu_tearoff=True, grab_anywhere=True, resizable=True, 
         #margins=(0,0), 
+        # no_titlebar=True,
         #use_custom_titlebar=True, 
         finalize=True, keep_on_top=True)
     window.set_min_size(window.size)
