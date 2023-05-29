@@ -3,6 +3,7 @@ $scriptpath = $MyInvocation.MyCommand.Path
 $dir = Split-Path $scriptpath
 Set-Location $dir
 
+# define paths
 $pythonExecutable = "py"
 $venvPath = ".\env-app"
 $requirementsFile = ".\requirements.txt"

@@ -22,6 +22,7 @@ Remove-Item freeze.txt
 # install & update dependencies with pip
 & pip install --upgrade pysimplegui
 & pip install --upgrade pyinstaller
+& pip install --upgrade pyinstaller_versionfile
 
 # update requirements file
 & pip freeze > requirements.txt
