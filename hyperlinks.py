@@ -11,7 +11,11 @@ urls = {
 items = sorted(urls.keys())
 
 sg.theme("DarkBlue")
+# font = None
 font = ("Courier New", 16, "underline")
+# font = ("Cascadia Code", 16, "underline")
+# font = ("Calibri", 16, "underline")
+
 
 layout = [
     [
@@ -25,7 +29,12 @@ layout = [
     ]
     for txt in items
 ]
-window = sg.Window("Hyperlink", layout, size=(250, 150), finalize=True)
+window = sg.Window(
+    "Hyperlink",
+    layout,
+    # size=(250, 150),
+    finalize=True,
+)
 
 while True:
     event, values = window.read()
