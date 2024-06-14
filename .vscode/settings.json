@@ -1,0 +1,15 @@
+{
+    // code spell checker 
+    "cSpell.words": [
+        "Dodeca",
+        "dodecadog",
+        "Octo"
+    ],
+    // python formatting & type checking
+    "[python]": {
+        "editor.formatOnSave": true,
+    },
+    "python.formatting.provider": "black",
+    "python.formatting.blackPath": "/.venv/Lib/site-packages/black",
+    "python.analysis.typeCheckingMode": "basic"
+}
