@@ -1,9 +1,11 @@
 import sys
-import os.path as path
+from os.path import dirname, abspath
 
-sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
+sys.path.append(dirname(dirname(abspath(__file__))))
 
 import dodecadog as dd
 
-dd.core.test()
-dd.core.dpg_demo()
+# dd.core.test()
+# dd.core.dpg_demo()
+
+print(dd.tk_tools.file_browse())
