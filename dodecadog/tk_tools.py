@@ -19,5 +19,16 @@ def file_browse(file_types=[]):
     return file_path
 
 
+def msg_box(title="INFO", message="Good Dog!"):
+    app_path = os.path.dirname(os.path.abspath(__file__))
+    icon_path = os.path.join(app_path, "assets", "icons", "dog.ico")
+    root = tk.Tk()
+    root.withdraw()
+    root.iconbitmap(icon_path)
+    messagebox.showinfo(title=title, message=message, parent=root)
+    root.destroy()
+
+
 if __name__ == "__main__":
-    print(file_browse())
+    # print(file_browse())
+    msg_box()
