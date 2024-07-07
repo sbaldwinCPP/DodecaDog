@@ -5,7 +5,8 @@ sys.path.append(dirname(dirname(abspath(__file__))))
 
 import dodecadog as dd
 
-# dd.core.test()
+
+dd.gui.basic()
 # dd.core.dpg_demo()
 
-print(dd.tk_tools.file_browse())
+# print(dd.tk_tools.file_browse())

@@ -1,34 +1,12 @@
-import dearpygui.dearpygui as dpg
-import dearpygui.demo as demo
+class AppClass:
+    """
+    App class to store values and perform operations.
+    """
 
+    default_num_1 = 0
+    default_num_2 = 3
+    default_bool = True
+    default_str = "ABC"
 
-def test():
-    print("hello world")
-
-
-def basic():
-    dpg.create_context()
-    dpg.create_viewport(title="Custom Title", width=600, height=300)
-
-    with dpg.window(label="Example Window"):
-        dpg.add_text("Hello, world")
-        dpg.add_button(label="Save")
-        dpg.add_input_text(label="string", default_value="Quick brown fox")
-        dpg.add_slider_float(label="float", default_value=0.273, max_value=1)
-
-    dpg.setup_dearpygui()
-    dpg.show_viewport()
-    dpg.start_dearpygui()
-    dpg.destroy_context()
-
-
-def dpg_demo():
-    dpg.create_context()
-    dpg.create_viewport(title="Custom Title", width=600, height=600)
-
-    demo.show_demo()
-
-    dpg.setup_dearpygui()
-    dpg.show_viewport()
-    dpg.start_dearpygui()
-    dpg.destroy_context()
+    def add(self):
+        print(self.default_num_1 + self.default_num_2)
