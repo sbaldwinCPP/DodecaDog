@@ -1,15 +1,14 @@
-import os
+from os.path import dirname, abspath, join
 import tkinter as tk
 from tkinter import filedialog, messagebox
 
 
 def file_browse():
     file_types = []
-    app_path = os.path.dirname(os.path.abspath(__file__))
-    icon_path = os.path.join(app_path, "assets", "icons", "file.ico")
+    app_path = dirname(abspath(__file__))
+    icon_path = join(app_path, "assets", "icons", "file.ico")
     file_types.append(("All Files", "*"))
     root = tk.Tk()
-    root.focus_force()
     root.withdraw()
     root.iconbitmap(icon_path)
     file_path = filedialog.askopenfilename(
@@ -24,8 +23,8 @@ def file_browse():
 def msg_box():
     title = "INFO"
     message = "Good Dog!"
-    app_path = os.path.dirname(os.path.abspath(__file__))
-    icon_path = os.path.join(app_path, "assets", "icons", "dog.ico")
+    app_path = dirname(abspath(__file__))
+    icon_path = join(app_path, "assets", "icons", "dog.ico")
     root = tk.Tk()
     root.withdraw()
     root.iconbitmap(icon_path)

@@ -3,10 +3,15 @@ class AppClass:
     App class to store values and perform operations.
     """
 
-    default_num_1 = 0
-    default_num_2 = 3
-    default_bool = True
-    default_str = "ABC"
+    def __init__(self):
+        self.a = 0
+        self.b = 0
 
-    def add(self):
-        print(self.default_num_1 + self.default_num_2)
+    def go(self):
+        return round(self.a * self.b, 2)
+
+    def set_a(self, a):
+        self.a = a
+
+    def set_b(self, b):
+        self.b = b
