@@ -6,10 +6,15 @@ authors = ["Scott-Baldwin <superscottyb@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = ">=3.11,<3.13"
 dearpygui = "^1.11.1"
+
+[tool.poetry.group.dev.dependencies]
 black = "^24.4.2"
 
+[tool.poetry.group.build.dependencies]
+pyinstaller = "^6.9.0"
+pyinstaller-versionfile = "^2.1.1"
 
 [build-system]
 requires = ["poetry-core"]

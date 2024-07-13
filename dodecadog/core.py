@@ -1,3 +1,7 @@
+NAME = "Template App"
+VERSION = "0.1.0.0"
+
+
 class AppClass:
     """
     App class to store values and perform operations.
