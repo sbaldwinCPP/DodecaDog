@@ -1,8 +1,7 @@
 import sys
-from os.path import dirname, abspath
 
-sys.path.append(dirname(dirname(abspath(__file__))))
+sys.path.append("./dodecadog")
 
-import dodecadog as dd
+import gui
 
-dd.main.main()
+gui.run()

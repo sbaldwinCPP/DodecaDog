@@ -11,5 +11,8 @@
     },
     "python.formatting.provider": "black",
     "python.formatting.blackPath": "/.venv/Lib/site-packages/black",
-    "python.analysis.typeCheckingMode": "basic"
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.extraPaths": [
+        "./dodecadog"
+    ]
 }

@@ -1,11 +1,11 @@
 import dearpygui.dearpygui as dpg
 import dearpygui.demo as demo
 
-from . import core
+import core
 
 
 # %% main
-def run(name, version):
+def run(name="test", version="experimental"):
     # create app instance
     app = core.AppClass()
 
@@ -75,3 +75,7 @@ def dpg_demo():
     dpg.show_viewport()
     dpg.start_dearpygui()
     dpg.destroy_context()
+
+
+if __name__ == "__main__":
+    run()
