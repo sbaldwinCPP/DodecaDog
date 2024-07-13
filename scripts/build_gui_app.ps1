@@ -8,6 +8,8 @@
 $venvPath = ".\.venv"
 & $venvPath\Scripts\activate.ps1
 
+& poetry install --with build --without dev
+
 # update version info file
 $versionScript = ".\scripts\create_version_file.py"
 & $venvPath\Scripts\python.exe $versionScript
