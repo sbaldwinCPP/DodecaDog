@@ -5,6 +5,7 @@ from pyinstaller_versionfile import create_versionfile
 sys.path.append("./dodecadog")
 from core import VERSION, NAME
 
+BUILD = ".1"
 
 # %% build path for version info file output
 folder = os.path.dirname(os.path.abspath(__file__))
@@ -15,7 +16,7 @@ filepath = os.path.join(folder, filename)
 # %% generate file
 create_versionfile(
     output_file=filepath,
-    version=VERSION,
+    version=VERSION + BUILD,
     # company_name="ACME Inc.",
     file_description=NAME,
     product_name=NAME,

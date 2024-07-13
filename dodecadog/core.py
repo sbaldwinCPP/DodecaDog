@@ -1,5 +1,5 @@
 NAME = "Template App"
-VERSION = "0.1.0.0"
+VERSION = "0.1.0"
 
 
 class AppClass:

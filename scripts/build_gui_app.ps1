@@ -4,7 +4,6 @@
 # $dir2 = Split-Path $dir1         # up second level
 # Set-Location $dir2
 
-
 # Activate the virtual environment
 $venvPath = ".\.venv"
 & $venvPath\Scripts\activate.ps1

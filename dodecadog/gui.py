@@ -1,3 +1,5 @@
+import os.path
+
 import dearpygui.dearpygui as dpg
 import dearpygui.demo as demo
 
@@ -5,13 +7,18 @@ import core, fonts
 
 
 # %% main
-def run(name="test", version="Experimental"):
+def run(name=core.NAME, version=core.VERSION):
     # create app instance
     app = core.AppClass()
 
+    app_path = os.path.dirname(os.path.abspath(__file__))
+    icon = os.path.join(app_path, "assets", "icons", "dog.ico")
+
     # boilerplate
     dpg.create_context()
-    dpg.create_viewport(title="Custom Title", width=200, height=200)
+    dpg.create_viewport(
+        title="Custom Title", width=200, height=200, small_icon=icon, large_icon=icon
+    )
 
     # add custom font
     fonts.set_default(i=1, s=16)
