@@ -421,4 +421,4 @@ test = ["build[virtualenv] (>=1.0.3)", "filelock (>=3.4.0)", "importlib-metadata
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11,<3.13"
-content-hash = "7e2b9ebe468346347625e6bd323019bebea7a6b7a1f5628acb8b78a6e416c61f"
+content-hash = "b71a51b13ecc6ea45e2e3fa59cc44bbc3165570b01ddf79e5cb60187030511a0"
