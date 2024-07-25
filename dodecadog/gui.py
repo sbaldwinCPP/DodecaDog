@@ -3,11 +3,11 @@ import os.path
 import dearpygui.dearpygui as dpg
 import dearpygui.demo as demo
 
-import core, fonts
+import core, fonts, tk_tools
 
 
 # %% main
-def run(name=core.NAME, version=core.VERSION):
+def run():
     # create app instance
     app = core.AppClass()
 
@@ -23,24 +23,8 @@ def run(name=core.NAME, version=core.VERSION):
     # add custom font
     fonts.set_default(i=1, s=16)
 
-    # layout
-    with dpg.window(tag="main"):
-        dpg.add_text(f"{name} v{version}")
-
-        dpg.add_slider_float(
-            label="a",
-            default_value=app.a,
-            max_value=1,
-            callback=callback_a,
-            user_data=app,
-        )
-
-        dpg.add_input_int(
-            label="b", default_value=app.b, callback=callback_b, user_data=app
-        )
-        with dpg.group(horizontal=True):
-            dpg.add_text("a * b =")
-            dpg.add_text("0.00", tag="display")
+    # layout - does a lot of the heavy lifting
+    _create_layout(app)
 
     # more boilerplate
     dpg.setup_dearpygui()
@@ -54,24 +38,110 @@ def run(name=core.NAME, version=core.VERSION):
     dpg.destroy_context()
 
 
+# %% layout
+def _create_layout(app, name=core.NAME, version=core.VERSION):
+    with dpg.window(tag="main"):
+        dpg.add_text(f"{name} v{version}")
+
+        _file_browse_group("file_path")
+        _files_browse_group("files_path")
+        _folder_browse_group("folder_path")
+
+        dpg.add_button(label="test", callback=_callback_check)
+
+        dpg.add_slider_float(
+            label="a",
+            default_value=app.a,
+            max_value=1,
+            callback=_callback_a,
+            user_data=app,
+        )
+
+        dpg.add_input_int(
+            label="b", default_value=app.b, callback=_callback_b, user_data=app
+        )
+        with dpg.group(horizontal=True):
+            dpg.add_text("a * b =")
+            dpg.add_text("0.00", tag="display")
+
+
 # %% callbacks
-def callback_a(sender, app_data, app):
+def _callback_a(sender, app_data, user_data):
+    app = user_data
     app.set_a(app_data)
-    update_display(sender, app_data, app)
+    _update_display(sender, app_data, app)
 
 
-def callback_b(sender, app_data, app):
+def _callback_b(sender, app_data, user_data):
+    app = user_data
     app.set_b(app_data)
-    update_display(sender, app_data, app)
+    _update_display(sender, app_data, app)
+
+
+# %% window elements
+# TODO: these might be able to combined into a single class
+def _file_browse_callback(sender, value, user_data):
+    tag = user_data
+    path = tk_tools.file_browse()
+    if path not in ("", []):
+        dpg.set_value(f"check_{tag}", True)
+        dpg.set_value(f"tip_{tag}", path)
+
+
+def _file_browse_group(tag):
+    with dpg.group(horizontal=True):
+        dpg.add_button(label="...", callback=_file_browse_callback, user_data=tag)
+        dpg.add_checkbox(tag=f"check_{tag}", enabled=False)
+        dpg.add_text(f"{tag}", tag=f"text_{tag}")
+    with dpg.tooltip(f"text_{tag}"):
+        dpg.add_text(tag, tag=f"tip_{tag}", wrap=400)
+
+
+def _files_browse_callback(sender, value, user_data):
+    tag = user_data
+    path = tk_tools.file_browse(multiple=True)
+    if path not in ("", []):
+        dpg.set_value(f"check_{tag}", True)
+        dpg.set_value(f"tip_{tag}", path)
+
+
+def _files_browse_group(tag):
+    with dpg.group(horizontal=True):
+        dpg.add_button(label="...", callback=_files_browse_callback, user_data=tag)
+        dpg.add_checkbox(tag=f"check_{tag}", enabled=False)
+        dpg.add_text(f"{tag}", tag=f"text_{tag}")
+    with dpg.tooltip(f"text_{tag}"):
+        dpg.add_text(tag, tag=f"tip_{tag}", wrap=400)
+
+
+def _folder_browse_callback(sender, value, user_data):
+    tag = user_data
+    path = tk_tools.folder_browse()
+    if path != "":
+        dpg.set_value(f"check_{tag}", True)
+        dpg.set_value(f"tip_{tag}", path)
+
+
+def _folder_browse_group(tag):
+    with dpg.group(horizontal=True):
+        dpg.add_button(
+            label="...",
+            callback=_folder_browse_callback,
+            user_data=tag,
+        )
+        dpg.add_checkbox(tag=f"check_{tag}", enabled=False)
+        dpg.add_text(f"{tag}", tag=f"text_{tag}")
+    with dpg.tooltip(f"text_{tag}"):
+        dpg.add_text(tag, tag=f"tip_{tag}", wrap=400)
 
 
 # %% helpers
-def update_display(sender, app_data, app):
+def _update_display(sender, app_data, app):
     dpg.set_value("display", app.go())
 
 
-def callback_check(sender, app_data, user_data):
-    print(f"sender: {sender}\napp_data: {app_data}\nuser_data{user_data}")
+def _callback_check(sender, app_data, user_data):
+    print(f"sender: {sender}\napp_data: {app_data}\nuser_data: {user_data}")
 
 
 # %% extras
